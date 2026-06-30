@@ -11,6 +11,7 @@ import Violations from "./pages/Violations";
 import Vouchers from "./pages/Vouchers";
 import VoucherPrint from "./pages/VoucherPrint";
 import DriverVouchersPrint from "./pages/DriverVouchersPrint";
+import Settings from "./pages/Settings";
 import "./App.css";
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path="/vouchers" element={<Vouchers />} />
           <Route path="/vouchers/print/:id" element={<VoucherPrint />} />
           <Route path="/summary" element={<Summary />} />
+          <Route path="/settings" element={<Settings />} />
         </Routes>
       </div>
     </BrowserRouter>

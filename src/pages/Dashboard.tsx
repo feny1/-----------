@@ -38,6 +38,12 @@ export default function Dashboard() {
       color: "bg-sky-400",
       shadow: "shadow-sky-400/30",
     },
+    {
+      title: "الإعدادات",
+      path: "/settings",
+      color: "bg-slate-600",
+      shadow: "shadow-slate-600/30",
+    },
   ];
 
   return (

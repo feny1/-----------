@@ -341,3 +341,20 @@ app.listen(3001, () => {
     }
   });
 });
+
+app.delete('/api/clear-all', (req, res) => {
+  try {
+    const tables = ['cars', 'drivers', 'contracts', 'violations', 'maintenance', 'vouchers', 'car_documents'];
+    const deleteTransaction = db.transaction(() => {
+      tables.forEach(table => {
+        db.prepare(`DELETE FROM ${table}`).run();
+        // Optional: Reset autoincrement counter
+        db.prepare(`DELETE FROM sqlite_sequence WHERE name='${table}'`).run();
+      });
+    });
+    deleteTransaction();
+    res.json({ message: 'All data cleared successfully' });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
