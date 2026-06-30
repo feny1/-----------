@@ -373,11 +373,12 @@ export default function DriverDetails() {
             </div>
 
             {/* Signature Block */}
-            <div style={{ display: "flex", justifyContent: "space-between", gap: 10, marginTop: "auto", paddingTop: 10 }}>
-              {["توقيع السائق المستعلم", "المحاسب المسؤول", "ختم المؤسسة المعتمد"].map((lbl, i) => (
+            <div style={{ display: "flex", justifyContent: "space-between", gap: 20, marginTop: "auto", paddingTop: 10 }}>
+              {["توقيع السائق المستعلم", "المحاسب المسؤول"].map((lbl, i) => (
                 <div key={i} style={{ flex: 1, textAlign: "center" }}>
                   <div style={{ fontWeight: 700, fontSize: 11 }}>{lbl}</div>
                   <div style={{ borderBottom: "1px solid #000", marginTop: 24, marginBottom: 2 }} />
+                  <div style={{ fontSize: 10, color: "#666" }}>التوقيع والختم</div>
                 </div>
               ))}
             </div>
