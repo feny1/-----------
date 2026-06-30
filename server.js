@@ -344,7 +344,7 @@ app.listen(3001, () => {
 
 app.delete('/api/clear-all', (req, res) => {
   try {
-    const tables = ['cars', 'drivers', 'contracts', 'violations', 'maintenance', 'vouchers', 'car_documents'];
+    const tables = ['violations', 'maintenance', 'car_documents', 'vouchers', 'contracts', 'drivers', 'cars'];
     const deleteTransaction = db.transaction(() => {
       tables.forEach(table => {
         db.prepare(`DELETE FROM ${table}`).run();
