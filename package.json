@@ -3,11 +3,13 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
+  "main": "main.cjs",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "tauri": "tauri"
+    "tauri": "tauri",
+    "build:win": "npm run build && electron-builder --win --x64"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.2",
@@ -27,7 +29,28 @@
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@vitejs/plugin-react": "^4.6.0",
+    "electron": "^42.5.1",
+    "electron-builder": "^26.15.3",
     "typescript": "~5.8.3",
     "vite": "^7.0.4"
+  },
+  "build": {
+    "appId": "com.ojrah.app",
+    "productName": "Ojrah",
+    "asar": false,
+    "files": [
+      "main.cjs",
+      "server.js",
+      "dist/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      "database.sqlite"
+    ],
+    "win": {
+      "target": [
+        "portable"
+      ]
+    }
   }
 }

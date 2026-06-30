@@ -1,12 +1,22 @@
 import express from 'express';
 import cors from 'cors';
 import Database from 'better-sqlite3';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import os from 'os';
+import fs from 'fs';
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-const db = new Database('database.sqlite');
+const userHome = os.homedir();
+const dbDir = path.join(userHome, 'OjrahApp');
+if (!fs.existsSync(dbDir)) {
+  fs.mkdirSync(dbDir, { recursive: true });
+}
+const dbPath = path.join(dbDir, 'database.sqlite');
+const db = new Database(dbPath);
 
 // Initialize DB
 db.exec(`
@@ -356,5 +366,18 @@ app.delete('/api/clear-all', (req, res) => {
     res.json({ message: 'All data cleared successfully' });
   } catch (e) {
     res.status(500).json({ error: e.message });
+  }
+});
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Serve static assets from Vite's build folder
+app.use(express.static(path.join(__dirname, 'dist')));
+
+// Serve the SPA's index.html for all non-API GET requests
+app.get(/.*/, (req, res) => {
+  if (!req.path.startsWith('/api')) {
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
   }
 });
